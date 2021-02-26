@@ -8,10 +8,12 @@
             "email": "geral@meuppt.pt"
         }
     ],
-    "require": {},
     "autoload": {
         "psr-4": {
             "WPH\\Security\\": "src/"
         }
+    },
+    "require": {
+        "martijnc/php-csp": "^1.0"
     }
 }
