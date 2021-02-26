@@ -10,14 +10,19 @@ class Headers {
     	'X-XSS-Protection' => '1; mode=block',
     	'Referrer-Policy' => 'no-referrer-when-downgrade',
     	'Strict-Transport-Security' => 'max-age=31536000; includeSubDomains',
-
+    	'Expect-CT' => '',
     ];
 
     public function __construct() {
 
-    	if (!empty($_SERVER['HTTPS'])) {
-    		add_filter('wp_headers', array($this, 'add'));
-    	}
+    	if (!file_exists(WP_CONTENT_DIR . '/security/')) {
+			mkdir(WP_CONTENT_DIR . '/security/', 0777, true);
+		}
+		
+		$this->site = site_url('/wp-content/security/', 'https');
+		$this->set('Expect-CT', 'max-age=0, report-uri=' . site_url("/wp-content/security/", "https"));
+
+    	add_filter('wp_headers', array($this, 'add'), 10, 1);
 
     }
 
