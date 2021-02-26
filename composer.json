@@ -1,0 +1,17 @@
+{
+    "name": "carloswph/wp-secure-headers",
+    "description": "Add and configure HTTP secure headers and more, for Wordpress websites.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "carlos",
+            "email": "geral@meuppt.pt"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WPH\\Security\\": "src/"
+        }
+    }
+}
