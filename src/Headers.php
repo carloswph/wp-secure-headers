@@ -5,10 +5,6 @@ use Phpcsp\Security\ContentSecurityPolicyHeaderBuilder;
 
 class Headers {
 
-	protected $csp;
-
-	protected $csp_result;
-
     public $toApply = [
     	'X-Frame-Options' => 'SAMEORIGIN',
     	'X-Content-Type-Options' => 'nosniff',
@@ -18,15 +14,10 @@ class Headers {
     	'Expect-CT' => '',
     ];
 
-    public function __construct(ContentSecurityPolicyHeaderBuilder $csp = null) {
+    public function __construct() {
 
     	if (!file_exists(WP_CONTENT_DIR . '/security/')) {
 			mkdir(WP_CONTENT_DIR . '/security/', 0777, true);
-		}
-
-		if($csp) {
-			$this->csp = $csp;
-			$this->setCsp();
 		}
 
 		$this->site = site_url('/wp-content/security/', 'https');
@@ -49,14 +40,6 @@ class Headers {
     public function set(string $header, string $value) {
 
     	$this->toApply[$header] = $value;
-    }
-
-    public function setCsp() {
-
-		$this->csp->setReportUri($this->site);
-		$this->csp_result = $this->csp->getHeaders(false);
-
-		$this->set($this->csp_result[0]['name'], $this->csp_result[0]['value']);
     }
 
     public static function list() {
