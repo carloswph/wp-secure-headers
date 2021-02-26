@@ -14,6 +14,8 @@ class Headers {
     	'Expect-CT' => '',
     ];
 
+    public $site;
+
     public function __construct() {
 
     	if (!file_exists(WP_CONTENT_DIR . '/security/')) {
@@ -23,15 +25,15 @@ class Headers {
 		$this->site = site_url('/wp-content/security/', 'https');
 		$this->set('Expect-CT', 'max-age=0, report-uri=' . site_url("/wp-content/security/", "https"));
 
-    	add_action('send_headers', array($this, 'add'));
+    	add_filter('wp_headers', array($this, 'add'), 10, 1);
 
     }
 
-    protected function add() {
+    protected function add($headers) {
 
     	foreach ($this->toApply as $key => $value) {
     		
-    		headers($key . ': ' . $value);
+    		headers($key . ': ' .);
     	}
 
     	return $headers;
