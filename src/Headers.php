@@ -28,7 +28,7 @@ class Headers {
 
     }
 
-    protected function add() {
+    public function add() {
 
     	foreach ($this->toApply as $key => $value) {
     		
