@@ -22,6 +22,7 @@ use WPH\Security\Headers;
 require __DIR__ . '/vendor/autoload.php';
 
 $sec_headers = new Headers();
+$sec_headers->set('Content-Security-Policy', 'connect-src "self"'); // Add new headers to the class array property.
 ```
 
 # Todo
