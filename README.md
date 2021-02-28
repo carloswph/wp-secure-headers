@@ -23,3 +23,8 @@ require __DIR__ . '/vendor/autoload.php';
 
 $sec_headers = new Headers();
 ```
+
+# Todo
+
+* Methods to setup and configure CSP and Permissions Policy headers
+* Some cookie managing tools
