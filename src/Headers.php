@@ -1,7 +1,6 @@
 <?php
 
 namespace WPH\Security;
-use Phpcsp\Security\ContentSecurityPolicyHeaderBuilder;
 
 class Headers {
 
@@ -14,7 +13,7 @@ class Headers {
     	'Expect-CT' => '',
     ];
 
-    public $site;
+    public $report_uri;
 
     public function __construct() {
 
@@ -22,21 +21,20 @@ class Headers {
 			mkdir(WP_CONTENT_DIR . '/security/', 0777, true);
 		}
 
-		$this->site = site_url('/wp-content/security/', 'https');
-		$this->set('Expect-CT', 'max-age=0, report-uri=' . site_url("/wp-content/security/", "https"));
+		$this->report_uri = site_url('/wp-content/security/', 'https');
+		$this->set('Expect-CT', 'max-age=0, report-uri=' . $this->report_uri);
 
-    	add_action('init', array($this, 'add'));
+    	add_action('send_headers', array($this, 'add'));
 
     }
 
-    protected function add($headers) {
+    protected function add() {
 
     	foreach ($this->toApply as $key => $value) {
     		
-    		headers($key . ': ' .);
+    		header($key . ': ' . $value);
     	}
 
-    	return $headers;
     }
 
     public function set(string $header, string $value) {

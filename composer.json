@@ -14,8 +14,5 @@
         "psr-4": {
             "WPH\\Security\\": "src/"
         }
-    },
-    "require": {
-        "martijnc/php-csp": "^1.0"
     }
 }
