@@ -4,6 +4,22 @@ A simple helper class to manage HTTP Security Headers made available when a webs
 
 # Installation
 
-As we prefer, this library can be installed using Composer -- `composer require carloswph/wp-secure-headers`.
+As we prefer, this library can be installed using Composer
+
+`composer require carloswph/wp-secure-headers`.
+
+Alternatively, you can just copy the class inside the `src` folder and use it in your plugin or theme.
 
 # Usage
+
+The class `WPH\Security\Headers` inserts secure headers for Wordpress. Having that said, it already comes with some basic headers, which can be seen by using the static method `wPH\Security\Headers::list()`. In the future, we intend to build some chained methods to allow configuring in detail two specific headers: Content-Security-Policy and Permissions-Policy. For the moment, both can be added to class instance through the `set()` method.
+
+## Using with Composer
+
+```php
+use WPH\Security\Headers;
+
+require __DIR__ . '/vendor/autoload.php';
+
+$sec_headers = new Headers();
+```
