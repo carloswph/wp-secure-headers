@@ -1,13 +1,25 @@
 <?php
 
 namespace WPH\Security;
-
+/**
+ * Helps configuring the Content-Security-Policy header and all possible arguments.
+ *
+ * @since  1.2.0
+ * @author  WP Helpers | Carlos Matos
+ *
+ *
+ */
 class ContentSecurityPolicy
 {
 	public $policies = [];
 
-	public $ReportOnly = false;
+	public $reportOnly = false;
 
+	/**
+	 * Retrieves the value of the built CSP header.
+	 *
+	 * @return  $csp  string  Complete value for the CSP header.
+	 */
 	public function get()
 	{
 		$csp = implode('; ', $this->policies);
@@ -15,9 +27,13 @@ class ContentSecurityPolicy
 		return $csp;
 	}
 
-	public function ReportOnly()
+	/**
+	 * Sets CSP header as Report Only
+	 * @since  1.2.0
+	 */
+	public function reportOnly()
 	{
-		$this->ReportOnly = true;
+		$this->reportOnly = true;
 	}
 
 	/**
