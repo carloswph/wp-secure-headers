@@ -3,7 +3,7 @@
     "description": "Add and configure HTTP secure headers and more, for Wordpress websites.",
     "type": "library",
     "license": "GPL-3.0-or-later",
-    "keywords": ["security", "https", "headers", "http headers", "secure headers", "security headers", "csp", "strict transport"],
+    "keywords": ["security", "https", "headers", "http headers", "secure headers", "security headers", "csp", "strict transport", "content security policy"],
     "authors": [
         {
             "name": "carlos",

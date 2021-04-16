@@ -15,7 +15,7 @@ class Headers {
 
     public $report_uri;
 
-    public function __construct() {
+    public function __construct(ContentSecurityPolicy $csp = null) {
 
     	if (!file_exists(WP_CONTENT_DIR . '/security/')) {
 			mkdir(WP_CONTENT_DIR . '/security/', 0777, true);
@@ -23,6 +23,14 @@ class Headers {
 
 		$this->report_uri = site_url('/wp-content/security/', 'https');
 		$this->set('Expect-CT', 'max-age=0, report-uri=' . $this->report_uri);
+
+        if($csp) {
+            if($csp->reportOnly === true) {
+                $this->set('Content-Security-Policy-Report-Only', $csp->get());
+            } else {
+                $this->set('Content-Security-Policy', $csp->get());
+            }
+        }
 
     	add_action('send_headers', array($this, 'add'));
 

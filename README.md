@@ -24,8 +24,25 @@ require __DIR__ . '/vendor/autoload.php';
 $sec_headers = new Headers();
 $sec_headers->set('Content-Security-Policy', 'connect-src "self"'); // Add new headers to the class array property.
 ```
+## Content Security Policy
+
+Since version 1.2.0, this library has an additional class, which can be passed as argument through the main class and adds the Content-Security-Policy header after being configured with dozens of chain methods. An example:
+
+```php
+use WPH\Security\Headers;
+use WPH\Security\ContentSecurityPolicy
+
+require __DIR__ . '/vendor/autoload.php';
+
+$csp = new ContentSecurityPolicy();
+$csp->setChild('https://google.com https://microsoft.com')
+    ->setConnect('https://*');
+
+$sec_headers = new Headers($csp); // Adds the Content-Security-Policy to the headers pool, with all set parameters
+```
+Besides all methods to the configure the various Content-Security-Policy directives individually, this additional class also has a method ReportOnly(), which indicates the main class that the header shall be set as Content-Security-Policy-Report-Only instead. All documentation and info about this complex header can be found inside the class docblock comments.
 
 # Todo
 
-* Methods to setup and configure CSP and Permissions Policy headers
+* Methods to setup and configure Permissions Policy headers
 * Some cookie managing tools
